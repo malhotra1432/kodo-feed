@@ -1,8 +1,8 @@
 package com.kodo.exercise.controller;
 
 import com.kodo.exercise.domain.command.CreateFeed;
+import com.kodo.exercise.domain.service.FeedService;
 import com.kodo.exercise.message.FeedMessage;
-import com.kodo.exercise.service.FeedService;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;

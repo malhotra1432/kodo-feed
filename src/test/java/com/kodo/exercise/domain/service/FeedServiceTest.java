@@ -1,4 +1,4 @@
-package com.kodo.exercise.service;
+package com.kodo.exercise.domain.service;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;

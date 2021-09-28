@@ -4,8 +4,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import com.kodo.exercise.domain.command.CreateFeed;
+import com.kodo.exercise.domain.service.FeedService;
 import com.kodo.exercise.message.FeedMessage;
-import com.kodo.exercise.service.FeedService;
 import com.kodo.exercise.util.TestDataBuilder;
 import java.util.ArrayList;
 import java.util.List;

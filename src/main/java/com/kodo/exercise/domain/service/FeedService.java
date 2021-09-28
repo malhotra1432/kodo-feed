@@ -1,6 +1,5 @@
-package com.kodo.exercise.service;
+package com.kodo.exercise.domain.service;
 
-import com.kodo.exercise.Entity.FeedEntity;
 import com.kodo.exercise.domain.Feed;
 import com.kodo.exercise.domain.command.CreateFeed;
 import com.kodo.exercise.domain.repository.FeedDomainRepository;
@@ -22,14 +21,5 @@ public class FeedService {
       feedList.add(Feed.create(feed));
     }
     feedDomainRepository.saveAll(feedList);
-  }
-
-  private FeedEntity feedEntityBuilder(CreateFeed feed) {
-    return FeedEntity.builder()
-        .name(feed.getName().toString())
-        .image(feed.getImage().toString())
-        .description(feed.getDescription().getDescription())
-        .dateLastEdited(feed.getDateLastEdited().getDateLastEdited())
-        .build();
   }
 }

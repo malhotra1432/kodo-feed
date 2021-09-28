@@ -1,6 +1,6 @@
 package com.kodo.exercise.adapter.repository;
 
-import com.kodo.exercise.Entity.FeedEntity;
+import com.kodo.exercise.adapter.repository.Entity.FeedEntity;
 import com.kodo.exercise.adapter.repository.codec.FeedStateAdapter;
 import com.kodo.exercise.adapter.repository.jpa.FeedJpaRepository;
 import com.kodo.exercise.domain.Feed;

@@ -1,4 +1,4 @@
-package com.kodo.exercise.Entity;
+package com.kodo.exercise.adapter.repository.Entity;
 
 import java.time.Instant;
 import javax.persistence.*;
