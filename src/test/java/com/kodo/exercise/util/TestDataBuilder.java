@@ -2,6 +2,7 @@ package com.kodo.exercise.util;
 
 import com.github.javafaker.Faker;
 import com.kodo.exercise.domain.FeedState;
+import com.kodo.exercise.domain.command.CreateFeed;
 import com.kodo.exercise.domain.value.DateLastEdited;
 import com.kodo.exercise.domain.value.Description;
 import com.kodo.exercise.domain.value.Image;
@@ -25,6 +26,14 @@ public class TestDataBuilder {
     return FeedState.builder()
         .name(Name.create(faker.funnyName().name()))
         .description(Description.create(faker.lordOfTheRings().character()))
+        .image(Image.create(faker.avatar().image()))
+        .dateLastEdited(DateLastEdited.create(Instant.now()));
+  }
+
+  public static CreateFeed.CreateFeedBuilder randomCreateFeedBuilder() {
+    return CreateFeed.builder()
+        .name(Name.create(faker.funnyName().name()))
+        .description(Description.create(faker.hitchhikersGuideToTheGalaxy().character()))
         .image(Image.create(faker.avatar().image()))
         .dateLastEdited(DateLastEdited.create(Instant.now()));
   }
