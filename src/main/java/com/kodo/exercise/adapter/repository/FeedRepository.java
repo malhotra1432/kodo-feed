@@ -8,6 +8,8 @@ import com.kodo.exercise.domain.repository.FeedDomainRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.NonNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -27,5 +29,17 @@ public class FeedRepository implements FeedDomainRepository {
       feedEntityList.add(feedStateAdapter.encode(feed.getState()));
     }
     feedJpaRepository.saveAll(feedEntityList);
+  }
+
+  @Override
+  public Page<FeedEntity> findByNameContainingOrDescriptionContaining(
+      String name, String description, Pageable pageable) {
+    return feedJpaRepository.findByNameContainingOrDescriptionContaining(
+        name, description, pageable);
+  }
+
+  @Override
+  public Page<FeedEntity> findAll(Pageable pageable) {
+    return feedJpaRepository.findAll(pageable);
   }
 }
