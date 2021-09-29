@@ -18,10 +18,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
 	implementation 'org.springframework.boot:spring-boot-starter:2.5.4'
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.5'
+	implementation("org.apache.cxf:cxf-spring-boot-starter-jaxrs:3.4.4")
+	implementation("com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.12.5")
+	implementation("com.fasterxml.jackson.module:jackson-modules-java8:2.12.5")
+	implementation('org.zalando:jackson-datatype-money:1.2.2')
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
 	testImplementation 'com.github.javafaker:javafaker:1.0.2'
+	testImplementation("org.mock-server:mockserver-netty:5.11.2")
 	runtimeOnly 'com.h2database:h2:1.4.200'
 }
 
