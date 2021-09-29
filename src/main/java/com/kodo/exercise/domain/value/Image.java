@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 public class Image {
-  @NonNull String description;
+  @NonNull String image;
 
   public static Image create(String image) {
     return new Image(image);

@@ -1,12 +1,12 @@
-package com.kodo.exercise.controller;
+package com.kodo.exercise.api.controller;
 
+import com.kodo.exercise.api.model.FeedResponse;
 import com.kodo.exercise.domain.command.CreateFeed;
 import com.kodo.exercise.domain.service.FeedService;
 import com.kodo.exercise.message.FeedMessage;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +25,8 @@ public class FeedController {
 
   @GetMapping(value = "/search/feeds")
   @ResponseStatus(value = HttpStatus.OK)
-  public ResponseEntity<Page> searchFeeds(String name, Pageable pageable) {
-    return ResponseEntity.ok().body(feedService.fetchFeeds(name, pageable));
+  public ResponseEntity<FeedResponse> searchFeeds(String text, Pageable pageable) {
+    return ResponseEntity.ok().body(feedService.fetchFeeds(text, pageable));
   }
 
   @PostMapping("/seed/feeds")

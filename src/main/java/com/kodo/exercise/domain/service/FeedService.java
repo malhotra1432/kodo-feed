@@ -1,11 +1,11 @@
 package com.kodo.exercise.domain.service;
 
+import com.kodo.exercise.api.model.FeedResponse;
 import com.kodo.exercise.domain.Feed;
 import com.kodo.exercise.domain.command.CreateFeed;
 import com.kodo.exercise.domain.repository.FeedDomainRepository;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +17,14 @@ public class FeedService {
     this.feedDomainRepository = feedDomainRepository;
   }
 
-  public Page fetchFeeds(String name, Pageable pageable) {
+  public FeedResponse fetchFeeds(String text, Pageable pageable) {
     try {
-      if (name == null) {
+      if (text == null) {
         return feedDomainRepository.findAll(pageable);
+      } else {
+        return feedDomainRepository.findByNameContainingOrDescriptionContaining(
+            text, text, pageable);
       }
-      return feedDomainRepository.findByNameContainingOrDescriptionContaining(name, name, pageable);
     } catch (Exception e) {
       throw new RuntimeException("Unable to fetch data: {}", e);
     }

@@ -3,12 +3,12 @@ package com.kodo.exercise.adapter.repository;
 import com.kodo.exercise.adapter.repository.Entity.FeedEntity;
 import com.kodo.exercise.adapter.repository.codec.FeedStateAdapter;
 import com.kodo.exercise.adapter.repository.jpa.FeedJpaRepository;
+import com.kodo.exercise.api.model.FeedResponse;
 import com.kodo.exercise.domain.Feed;
 import com.kodo.exercise.domain.repository.FeedDomainRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.NonNull;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
@@ -32,14 +32,16 @@ public class FeedRepository implements FeedDomainRepository {
   }
 
   @Override
-  public Page<FeedEntity> findByNameContainingOrDescriptionContaining(
+  public FeedResponse findByNameContainingOrDescriptionContaining(
       String name, String description, Pageable pageable) {
-    return feedJpaRepository.findByNameContainingOrDescriptionContaining(
-        name, description, pageable);
+    var pageFeedEntity =
+        feedJpaRepository.findByNameContainingOrDescriptionContaining(name, description, pageable);
+    return feedStateAdapter.decode(pageFeedEntity);
   }
 
   @Override
-  public Page<FeedEntity> findAll(Pageable pageable) {
-    return feedJpaRepository.findAll(pageable);
+  public FeedResponse findAll(Pageable pageable) {
+    var pageFeedEntity = feedJpaRepository.findAll(pageable);
+    return feedStateAdapter.decode(pageFeedEntity);
   }
 }

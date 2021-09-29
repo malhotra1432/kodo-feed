@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface FeedJpaRepository extends PagingAndSortingRepository<FeedEntity, Long> {
-  public Page<FeedEntity> findByNameContainingOrDescriptionContaining(
+  Page<FeedEntity> findByNameContainingOrDescriptionContaining(
       String name, String description, Pageable pageable);
 
-  public Page<FeedEntity> findAll(Pageable pageable);
+  Page<FeedEntity> findAll(Pageable pageable);
 }
