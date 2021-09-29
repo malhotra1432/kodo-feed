@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +23,6 @@ public class FeedController {
   }
 
   @GetMapping(value = "/search/feeds")
-  @ResponseStatus(value = HttpStatus.OK)
   public ResponseEntity<FeedResponse> searchFeeds(String text, Pageable pageable) {
     return ResponseEntity.ok().body(feedService.fetchFeeds(text, pageable));
   }
