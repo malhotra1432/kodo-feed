@@ -26,11 +26,14 @@ public class FeedController {
   public ResponseEntity<FeedResponse> searchFeeds(String search, Pageable pageable) {
     FeedResponse response;
     if (search == null) {
+      log.info("Fetching feed data");
       response = feedService.fetchFeeds(pageable);
     } else if (search.startsWith("\"") && search.endsWith("\"")) {
+      log.info("Fetching feed data to search {}", search);
       response = feedService.fetchFeedsBasedOnSingleKeyword(search.replace("\"", ""), pageable);
     } else {
       var searchTextSplit = search.split(" ");
+      log.info("Fetching feed data to search for list {}", List.of(searchTextSplit));
       response = feedService.fetchFeedsBasedOnMultipleKeywords(List.of(searchTextSplit), pageable);
     }
     return ResponseEntity.ok().body(response);

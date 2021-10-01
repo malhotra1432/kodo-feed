@@ -11,10 +11,10 @@ import org.springframework.data.jpa.domain.Specification;
 public interface FeedDomainRepository {
   void saveAll(@NonNull List<Feed> feedList);
 
+  FeedResponse findAll(Pageable pageable);
+
   FeedResponse findByNameContainingOrDescriptionContaining(
       String name, String description, Pageable pageable);
-
-  FeedResponse findAll(Pageable pageable);
 
   FeedResponse findAll(Specification<FeedEntity> specification, Pageable pageable);
 }

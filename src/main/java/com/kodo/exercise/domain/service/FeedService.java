@@ -39,6 +39,15 @@ public class FeedService {
 
   public FeedResponse fetchFeedsBasedOnMultipleKeywords(
       List<String> searchTextList, Pageable pageable) {
+    Specification<FeedEntity> specification = getFeedEntitySpecification(searchTextList);
+    try {
+      return feedDomainRepository.findAll(specification, pageable);
+    } catch (Exception e) {
+      throw new RuntimeException("Unable to fetch data: {}", e);
+    }
+  }
+
+  private Specification<FeedEntity> getFeedEntitySpecification(List<String> searchTextList) {
     Specification<FeedEntity> specification = null;
     for (var text : searchTextList) {
       var feedEntitySpecification =
@@ -49,12 +58,12 @@ public class FeedService {
         specification = specification.or(feedEntitySpecification);
       }
     }
-    return feedDomainRepository.findAll(specification, pageable);
+    return specification;
   }
 
   public void storeFeedData(List<CreateFeed> feeds) {
     List<Feed> feedList = new ArrayList<>();
-    for (CreateFeed feed : feeds) {
+    for (var feed : feeds) {
       feedList.add(Feed.create(feed));
     }
     try {

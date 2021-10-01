@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "Feeds")
+@Table(name = "FeedState")
 public class FeedEntity {
   @Id
   @Column
