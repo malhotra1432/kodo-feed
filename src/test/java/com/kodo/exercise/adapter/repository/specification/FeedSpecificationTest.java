@@ -34,14 +34,14 @@ class FeedSpecificationTest {
     Specification<FeedEntity> specification = null;
 
     for (var text : stringArray) {
-      var wordSpecification =
+      var feedEntitySpecification =
           FeedSpecification.nameContains(text).or(FeedSpecification.descriptionContains(text));
       if (specification == null) {
-        specification = wordSpecification;
+        specification = feedEntitySpecification;
       } else {
-        specification = specification.or(wordSpecification);
+        specification = specification.or(feedEntitySpecification);
       }
-      wordSpecification.toPredicate(feedEntityRoot, criteriaQueryMock, criteriaBuilderMock);
+      feedEntitySpecification.toPredicate(feedEntityRoot, criteriaQueryMock, criteriaBuilderMock);
     }
 
     verify(feedEntityRoot, times(stringArray.length)).get("name");
