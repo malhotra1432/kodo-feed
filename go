@@ -46,7 +46,7 @@ commands are:
     build    - Build the JAR
     bootRun  - Run application locally
     go       - List out commands
-    test     - Run Unit Test
+    test     - Run Unit and Integration Test
 EOF
 exit 1
 }

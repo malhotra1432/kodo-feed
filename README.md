@@ -5,7 +5,7 @@
 - `./go clean build`   - To clean and build project
 - `./go bootRun`       - To run project
 - `./go build`         - To build project
-- `./go test`          - To run unit tests
+- `./go test`          - To run unit and integration tests
 - `./go`              - To list out all commands
 
 # Links 
