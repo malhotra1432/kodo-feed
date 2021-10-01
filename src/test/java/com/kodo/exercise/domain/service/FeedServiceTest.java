@@ -9,9 +9,11 @@ import com.kodo.exercise.message.FeedMessage;
 import com.kodo.exercise.util.TestDataBuilder;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FeedServiceTest {
 
   private final FeedDomainRepository feedDomainRepository = mock(FeedDomainRepository.class);
@@ -32,10 +34,19 @@ class FeedServiceTest {
 
   @Test
   void shouldSearchFeeds() {
-    String textSearch = "King";
     Pageable pageable = PageRequest.of(0, 10);
 
-    feedService.fetchFeeds(textSearch, pageable);
+    feedService.fetchFeeds(pageable);
+
+    verify(feedDomainRepository, times(1)).findAll(pageable);
+  }
+
+  @Test
+  void shouldFetchFeedWithExactTexts() {
+    String textSearch = "\"the King\"";
+    Pageable pageable = PageRequest.of(0, 10);
+
+    feedService.fetchFeedsBasedOnSingleKeyword(textSearch, pageable);
 
     verify(feedDomainRepository, times(1))
         .findByNameContainingOrDescriptionContaining(textSearch, textSearch, pageable);

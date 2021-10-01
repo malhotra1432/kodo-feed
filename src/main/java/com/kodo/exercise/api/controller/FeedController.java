@@ -23,8 +23,17 @@ public class FeedController {
   }
 
   @GetMapping(value = "/search/feeds")
-  public ResponseEntity<FeedResponse> searchFeeds(String text, Pageable pageable) {
-    return ResponseEntity.ok().body(feedService.fetchFeeds(text, pageable));
+  public ResponseEntity<FeedResponse> searchFeeds(String search, Pageable pageable) {
+    FeedResponse response;
+    if (search == null) {
+      response = feedService.fetchFeeds(pageable);
+    } else if (search.startsWith("\"") && search.endsWith("\"")) {
+      response = feedService.fetchFeedsBasedOnSingleKeyword(search.replace("\"", ""), pageable);
+    } else {
+      var searchTextSplit = search.split(" ");
+      response = feedService.fetchFeedsBasedOnMultipleKeywords(List.of(searchTextSplit), pageable);
+    }
+    return ResponseEntity.ok().body(response);
   }
 
   @PostMapping("/seed/feeds")

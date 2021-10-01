@@ -13,6 +13,7 @@ import java.util.List;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -35,6 +36,11 @@ public class FeedRepository implements FeedDomainRepository {
   }
 
   @Override
+  public FeedResponse findAll(Pageable pageable) {
+    return feedResponse(feedJpaRepository.findAll(pageable));
+  }
+
+  @Override
   public FeedResponse findByNameContainingOrDescriptionContaining(
       String name, String description, Pageable pageable) {
 
@@ -43,8 +49,8 @@ public class FeedRepository implements FeedDomainRepository {
   }
 
   @Override
-  public FeedResponse findAll(Pageable pageable) {
-    return feedResponse(feedJpaRepository.findAll(pageable));
+  public FeedResponse findAll(Specification<FeedEntity> specification, Pageable pageable) {
+    return feedResponse(feedJpaRepository.findAll(specification, pageable));
   }
 
   public FeedResponse feedResponse(Page<FeedEntity> response) {

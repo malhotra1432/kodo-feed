@@ -30,12 +30,33 @@ class FeedControllerTest {
   }
 
   @Test
-  void shouldSearchFeedData() {
-    String textSearch = "King";
+  void shouldSearchFeedWithoutSearchText() {
+    String textSearch = null;
     Pageable pageable = PageRequest.of(0, 10);
 
     feedController.searchFeeds(textSearch, pageable);
 
-    verify(feedService).fetchFeeds(textSearch, pageable);
+    verify(feedService).fetchFeeds(pageable);
+  }
+
+  @Test
+  void shouldSearchFeedWithExactTexts() {
+    String textSearch = "\"the King\"";
+    Pageable pageable = PageRequest.of(0, 10);
+
+    feedController.searchFeeds(textSearch, pageable);
+
+    verify(feedService).fetchFeedsBasedOnSingleKeyword(textSearch.replace("\"", ""), pageable);
+  }
+
+  @Test
+  void shouldSearchFeedWithMultipleTexts() {
+    String textSearch = "the King";
+    var textSearchArray = textSearch.split(" ");
+    Pageable pageable = PageRequest.of(0, 10);
+
+    feedController.searchFeeds(textSearch, pageable);
+
+    verify(feedService).fetchFeedsBasedOnMultipleKeywords(List.of(textSearchArray), pageable);
   }
 }

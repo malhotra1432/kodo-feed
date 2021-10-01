@@ -56,7 +56,7 @@ public class FeedIntegrationTest {
     mockMvc
         .perform(
             MockMvcRequestBuilders.get(
-                    "/api/v1/search/feeds?page=0&size=10&sort=dateLastEdited&text=King")
+                    "/api/v1/search/feeds?page=0&size=10&sort=dateLastEdited&search=King")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
   }
