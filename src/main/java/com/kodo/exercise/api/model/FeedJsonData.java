@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FeedData {
+public class FeedJsonData {
   private String name;
   private String image;
   private String description;

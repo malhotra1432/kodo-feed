@@ -39,9 +39,9 @@ public class FeedService {
 
   public FeedResponse fetchFeedsBasedOnMultipleKeywords(
       List<String> searchTextList, Pageable pageable) {
-    Specification<FeedEntity> specification = getFeedEntitySpecification(searchTextList);
+    //    Specification<FeedEntity> specification = getFeedEntitySpecification(searchTextList);
     try {
-      return feedDomainRepository.findAll(specification, pageable);
+      return feedDomainRepository.findAll(searchTextList, pageable);
     } catch (Exception e) {
       throw new RuntimeException("Unable to fetch data: {}", e);
     }
