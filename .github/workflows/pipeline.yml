@@ -65,3 +65,8 @@ jobs:
           name: Tests and Jacoco Reports
           path: build/reports/
           retention-days: 5
+
+  docker-build:
+    needs: [ build-and-unit-test, integration-test ]
+    name: Dockerize & deploy nonlive
+    runs-on: ubuntu-latest
