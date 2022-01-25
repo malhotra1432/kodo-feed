@@ -20,6 +20,12 @@ task_format() {
   process_command_chain "$@"
 }
 
+task_verify_format() {
+  ./gradlew verGJF
+
+  process_command_chain "$@"
+}
+
 task_build(){
 ./gradlew build
 
@@ -41,12 +47,13 @@ task_usage(){
 Usage $0 COMMAND
 
 commands are:
-    clean    - Clean up build artifacts
-    format   - Formats the code as per google format plugin
-    build    - Build the JAR
-    bootRun  - Run application locally
-    go       - List out commands
-    test     - Run Unit and Integration Test
+    clean           - Clean up build artifacts
+    format          - Formats the code as per google format plugin
+    verify_format   - Verify whether code is formatted correctly
+    build           - Build the JAR
+    bootRun         - Run application locally
+    go              - List out commands
+    test            - Run Unit and Integration Test
 EOF
 exit 1
 }
@@ -57,6 +64,7 @@ shift || true
 case "${CMD}" in
     clean) task_clean "$@" ;;
     format) task_format "$@" ;;
+    verify_format) task_verify_format "$@" ;;
     build) task_build "$@" ;;
     go) clean build "$@" ;;
     test) task_test "$@" ;;
