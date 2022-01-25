@@ -42,3 +42,26 @@ jobs:
           name: Tests and Jacoco Reports
           path: build/reports/
           retention-days: 5
+
+  integration-test:
+    name: Integration test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: 11.0.8
+      - name: Run Integration tests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+        run: ./go clean integrationTest
+      - name: Upload Integration test Reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Tests and Jacoco Reports
+          path: build/reports/
+          retention-days: 5
