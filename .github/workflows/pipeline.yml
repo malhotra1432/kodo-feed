@@ -70,3 +70,7 @@ jobs:
     needs: [ build-and-unit-test, integration-test ]
     name: Dockerize & deploy nonlive
     runs-on: ubuntu-latest
+    steps:
+      - name: Build docker image
+        env:
+          DOCKER_FILE: Dockerfile
