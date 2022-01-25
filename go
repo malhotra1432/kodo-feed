@@ -38,6 +38,12 @@ task_test() {
   process_command_chain "$@"
 }
 
+task_integrationTest() {
+  ./gradlew integrationTest
+
+  process_command_chain "$@"
+}
+
 task_bootRun(){
 ./gradlew bootRun
 }
@@ -54,6 +60,7 @@ commands are:
     bootRun         - Run application locally
     go              - List out commands
     test            - Run Unit and Integration Test
+    integrationTest - Run Integration Test
 EOF
 exit 1
 }
@@ -68,6 +75,7 @@ case "${CMD}" in
     build) task_build "$@" ;;
     go) clean build "$@" ;;
     test) task_test "$@" ;;
+    integrationTest) task_integrationTest "$@" ;;
     bootRun) task_bootRun "$@" ;;
     *) task_usage ;;
 esac
