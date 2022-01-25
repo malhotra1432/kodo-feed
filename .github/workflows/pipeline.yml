@@ -71,8 +71,11 @@ jobs:
     name: Dockerize & deploy nonlive
     runs-on: ubuntu-latest
     steps:
-      - name: Build docker image
-        env:
-          DOCKER_FILE: Dockerfile
-        run:
-          docker build . -t kodo-feed
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: user/app:latest
