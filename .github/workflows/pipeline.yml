@@ -71,6 +71,11 @@ jobs:
     name: Dockerize & deploy nonlive
     runs-on: ubuntu-latest
     steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifacts
+          path: build/libs/
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up QEMU
