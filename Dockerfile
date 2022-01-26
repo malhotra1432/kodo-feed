@@ -1,4 +1,9 @@
-FROM openjdk:11
-EXPOSE 8080
-ADD target/kodo-feed.jar kodo-feed.jar
-ENTRYPOINT ["java","-jar","/kodo-feed.jar"]
+FROM adoptopenjdk/openjdk11
+EXPOSE 8090
+RUN useradd -d /app/ -U -m -s /bin/sh malhotra
+USER malhotra
+COPY build/libs/*.jar /app/kodo-feed.jar
+
+WORKDIR /app
+
+ENTRYPOINT java -server -Xms1G -Xmx1G -jar kodo-feed.jar | tee -a /var/log/containers/spring-boot-skeleton.log
