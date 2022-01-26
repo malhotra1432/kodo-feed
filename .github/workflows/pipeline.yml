@@ -77,6 +77,6 @@ jobs:
           image: kodo/kodo-feed
           tags: latest
           registry: docker.io
-          dockerfile: Dockerfile
+          dockerfile: Dockerfile.ci
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
